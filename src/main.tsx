@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { Analytics } from '@vercel/analytics/react';
 import Marketing from './pages/Marketing';
 import InspectionApp from './pages/InspectionApp';
 import ModelLanding from './pages/ModelLanding';
@@ -22,6 +23,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
         <Route path="/faq" element={<Faq />} />
         <Route path="/:slug" element={<ModelLanding />} />
       </Routes>
+      <Analytics />
     </BrowserRouter>
   </React.StrictMode>
 );
