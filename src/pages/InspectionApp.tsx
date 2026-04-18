@@ -4,6 +4,7 @@ import { Icon } from '../components/Icon';
 import logoMark from '../assets/logo-mark.svg';
 import { CATEGORIES, ITEMS, TOTAL_ITEMS, type CategoryId } from '../data/checklist';
 import { ModelSilhouette } from '../components/ModelSilhouette';
+import { ThemeToggle } from '../components/ThemeToggle';
 import { useIsMobile } from '../hooks/useMediaQuery';
 import {
   loadSession,
@@ -175,6 +176,7 @@ const TopBar = ({
             {!isMobile && 'Reset'}
           </button>
         )}
+        <ThemeToggle compact />
       </div>
     </div>
   );
@@ -220,6 +222,7 @@ const ModelPicker = ({
     >
       {resume && resume.model && (
         <div
+          className="cyber-frame"
           style={{
             width: '100%',
             maxWidth: 640,
@@ -253,7 +256,7 @@ const ModelPicker = ({
               {resumeFlags > 0 && (
                 <>
                   {' · '}
-                  <span style={{ color: 'var(--accent)' }}>{resumeFlags} flagged</span>
+                  <span style={{ color: 'var(--danger)' }}>{resumeFlags} flagged</span>
                 </>
               )}
             </div>
@@ -316,6 +319,7 @@ const ModelPicker = ({
           return (
           <button
             key={m.id}
+            className="cyber-frame"
             onClick={() => onPick(m)}
             style={{
               background: 'var(--bg-1)',
@@ -436,7 +440,7 @@ const SidebarNav = ({
           style={{
             fontFamily: 'var(--font-mono)',
             fontSize: 11,
-            color: flagged > 0 ? 'var(--accent)' : 'var(--fg-2)',
+            color: flagged > 0 ? 'var(--danger)' : 'var(--fg-2)',
           }}
         >
           {done}/{c.count}
@@ -484,12 +488,12 @@ const SidebarNav = ({
 const ACTIONS: { key: Status; color: string; glyph: ReactNode }[] = [
   {
     key: 'pass',
-    color: '#00D18F',
+    color: 'var(--ok)',
     glyph: <polyline points="5 12 10 17 19 7" />,
   },
   {
     key: 'flag',
-    color: '#FF2D2D',
+    color: 'var(--danger)',
     glyph: (
       <>
         <line x1="5" y1="4" x2="5" y2="21" />
@@ -499,7 +503,7 @@ const ACTIONS: { key: Status; color: string; glyph: ReactNode }[] = [
   },
   {
     key: 'skip',
-    color: '#6E7480',
+    color: 'var(--fg-2)',
     glyph: (
       <>
         <line x1="6" y1="6" x2="18" y2="18" />
@@ -542,6 +546,7 @@ const InspectionView = ({
   return (
     <div style={{ flex: 1, display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
       <div
+        className="cyber-frame"
         style={{
           padding: isMobile ? '16px 16px 12px' : '24px 20px 16px',
           borderBottom: '1px solid var(--line)',
@@ -590,7 +595,7 @@ const InspectionView = ({
                       fontSize: 11,
                       color:
                         f.key === 'flagged' && f.count > 0
-                          ? 'var(--accent)'
+                          ? 'var(--danger)'
                           : 'var(--fg-2)',
                     }}
                   >
@@ -620,9 +625,9 @@ const InspectionView = ({
             return (
               <div
                 key={item.id}
+                className={s === 'flag' ? 'flag-row' : undefined}
                 style={{
                   borderBottom: '1px solid var(--line-soft)',
-                  background: s === 'flag' ? 'rgba(255,45,45,0.04)' : 'transparent',
                 }}
               >
               <div
@@ -676,7 +681,7 @@ const InspectionView = ({
                         border: '1px solid ' + (s === a.key ? a.color : 'var(--line)'),
                         borderRadius: 2,
                         cursor: 'pointer',
-                        color: s === a.key ? '#0A0B0D' : a.color,
+                        color: s === a.key ? 'var(--bg-0)' : a.color,
                         display: 'inline-flex',
                         alignItems: 'center',
                         justifyContent: 'center',
@@ -707,7 +712,7 @@ const InspectionView = ({
                       padding: '8px 10px',
                       background: 'var(--bg-1)',
                       border: '1px solid var(--line)',
-                      borderLeft: '2px solid var(--accent)',
+                      borderLeft: '2px solid var(--danger)',
                       borderRadius: 2,
                       color: 'var(--fg-0)',
                       fontFamily: 'var(--font-sans)',

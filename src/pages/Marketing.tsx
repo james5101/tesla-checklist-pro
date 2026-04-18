@@ -2,8 +2,10 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import logoMark from '../assets/logo-mark.svg';
 import { useIsMobile, useIsNarrow } from '../hooks/useMediaQuery';
+import { useSeo } from '../hooks/useSeo';
+import { ThemeToggle } from '../components/ThemeToggle';
 
-const Nav = () => {
+export const Nav = () => {
   const [scrolled, setScrolled] = useState(false);
   const isMobile = useIsMobile();
   const isNarrow = useIsNarrow();
@@ -21,7 +23,9 @@ const Nav = () => {
         right: 0,
         height: 56,
         zIndex: 100,
-        background: scrolled ? 'rgba(10,11,13,0.72)' : 'transparent',
+        background: scrolled
+          ? 'color-mix(in srgb, var(--bg-0) 72%, transparent)'
+          : 'transparent',
         backdropFilter: scrolled ? 'blur(16px)' : 'none',
         WebkitBackdropFilter: scrolled ? 'blur(16px)' : 'none',
         borderBottom: scrolled ? '1px solid var(--line)' : '1px solid transparent',
@@ -54,7 +58,8 @@ const Nav = () => {
             ))}
           </div>
         )}
-        <div style={{ marginLeft: 'auto', display: 'flex', gap: 8 }}>
+        <div style={{ marginLeft: 'auto', display: 'flex', gap: 8, alignItems: 'center' }}>
+          <ThemeToggle compact />
           {!isMobile && (
             <Link to="/app" className="btn btn--ghost">
               Sign in
@@ -77,7 +82,7 @@ const Hero = () => {
         paddingTop: isMobile ? 100 : 160,
         paddingBottom: isMobile ? 64 : 120,
         background:
-          'radial-gradient(ellipse at 70% 0%, #1a0808 0%, transparent 45%), #0A0B0D',
+          'radial-gradient(ellipse at 70% 0%, var(--accent-glow) 0%, transparent 45%), var(--bg-0)',
         borderBottom: '1px solid var(--line)',
       }}
     >
@@ -138,38 +143,50 @@ const Hero = () => {
         </div>
         <div
           style={{
-            display: 'grid',
-            gridTemplateColumns: isMobile ? 'repeat(2, 1fr)' : 'repeat(4, auto)',
-            columnGap: isMobile ? 20 : 48,
-            rowGap: isMobile ? 24 : 0,
-            justifyContent: isMobile ? 'stretch' : 'start',
             marginTop: isMobile ? 48 : 80,
             paddingTop: 32,
             borderTop: '1px solid var(--line)',
           }}
         >
-          {[
-            { v: '147', l: 'Inspection points' },
-            { v: '38,412', l: 'Cars inspected' },
-            { v: '4.9/5', l: 'Owner rating' },
-            { v: '$0', l: 'Forever free' },
-          ].map((s) => (
-            <div key={s.l}>
-              <div
-                style={{
-                  fontFamily: 'var(--font-mono)',
-                  fontSize: isMobile ? 24 : 32,
-                  letterSpacing: 0,
-                  fontWeight: 500,
-                }}
-              >
-                {s.v}
+          <div
+            className="eyebrow"
+            style={{ color: 'var(--fg-2)', marginBottom: isMobile ? 16 : 20 }}
+          >
+            ● SOURCED FROM
+          </div>
+          <div
+            style={{
+              display: 'grid',
+              gridTemplateColumns: isMobile ? 'repeat(2, 1fr)' : 'repeat(4, auto)',
+              columnGap: isMobile ? 20 : 48,
+              rowGap: isMobile ? 20 : 0,
+              justifyContent: isMobile ? 'stretch' : 'start',
+            }}
+          >
+            {[
+              { v: 'TeslaMotorsClub', l: 'Owner forum · est. 2006' },
+              { v: 'r/TeslaLounge', l: 'Reddit · 180k members' },
+              { v: 'Cybertruck Owners', l: 'Owners club forum' },
+              { v: 'InsideEVs', l: 'Publication · coverage' },
+            ].map((s) => (
+              <div key={s.v}>
+                <div
+                  style={{
+                    fontFamily: 'var(--font-mono)',
+                    fontSize: isMobile ? 15 : 18,
+                    letterSpacing: 0,
+                    fontWeight: 500,
+                    whiteSpace: 'nowrap',
+                  }}
+                >
+                  {s.v}
+                </div>
+                <div className="eyebrow" style={{ marginTop: 6 }}>
+                  {s.l}
+                </div>
               </div>
-              <div className="eyebrow" style={{ marginTop: 6 }}>
-                {s.l}
-              </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
     </section>
@@ -354,7 +371,7 @@ const HowItWorks = () => {
   );
 };
 
-const Footer = () => {
+export const Footer = () => {
   const isMobile = useIsMobile();
   return (
     <footer style={{ padding: isMobile ? '48px 0 32px' : '80px 0 40px' }}>
@@ -380,7 +397,43 @@ const Footer = () => {
   );
 };
 
+const HOWTO_JSONLD = {
+  '@context': 'https://schema.org',
+  '@type': 'HowTo',
+  name: 'Tesla Delivery Day Inspection',
+  description:
+    'A 147-point inspection to perform when taking delivery of a new Tesla, sourced from owner community forums.',
+  totalTime: 'PT30M',
+  step: [
+    {
+      '@type': 'HowToStep',
+      position: 1,
+      name: 'Pick your model',
+      text: 'Select your Tesla model to load the model-specific checklist.',
+    },
+    {
+      '@type': 'HowToStep',
+      position: 2,
+      name: 'Walk the car',
+      text: 'Tap pass, flag a defect, or skip. Add notes to flagged items. Works offline.',
+    },
+    {
+      '@type': 'HowToStep',
+      position: 3,
+      name: 'Hand it to your advisor',
+      text: 'Export a timestamped PDF and email it to your delivery advisor before you sign.',
+    },
+  ],
+};
+
 export default function Marketing() {
+  useSeo({
+    title: 'TeslaChecklistPro — Free 147-point Tesla delivery inspection checklist',
+    description:
+      'Free delivery-day inspection checklist for every Tesla: Model S, 3, X, Y, and Cybertruck. 147 points sourced from owner forums. Export a PDF for your advisor. No signup.',
+    canonical: 'https://teslachecklistpro.com/',
+    jsonLd: HOWTO_JSONLD,
+  });
   return (
     <>
       <Nav />

@@ -4,7 +4,38 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/src/assets/logo-mark.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>TeslaChecklistPro</title>
+    <meta name="theme-color" content="#0A0B0D" />
+    <title>TeslaChecklistPro — Free 147-point Tesla delivery inspection checklist</title>
+    <meta
+      name="description"
+      content="Free delivery-day inspection checklist for every Tesla: Model S, 3, X, Y, and Cybertruck. 147 points sourced from owner forums. Export a PDF for your advisor. No signup."
+    />
+    <link rel="canonical" href="https://teslachecklistpro.com/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="TeslaChecklistPro" />
+    <meta property="og:title" content="TeslaChecklistPro — Free 147-point Tesla delivery inspection" />
+    <meta
+      property="og:description"
+      content="A 147-point delivery inspection for every Tesla, built from 4 years of owner forum reports. Free, no signup, PDF export."
+    />
+    <meta property="og:url" content="https://teslachecklistpro.com/" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="TeslaChecklistPro — Free Tesla delivery inspection" />
+    <meta
+      name="twitter:description"
+      content="147-point delivery checklist sourced from TeslaMotorsClub, r/TeslaLounge, and more. PDF export. Free."
+    />
+    <script>
+      // Seed theme before React mounts to prevent flash
+      (function () {
+        try {
+          var t = localStorage.getItem('tcp-theme') || 'standard';
+          document.documentElement.setAttribute('data-theme', t);
+        } catch (e) {
+          document.documentElement.setAttribute('data-theme', 'standard');
+        }
+      })();
+    </script>
   </head>
   <body>
     <div id="root"></div>

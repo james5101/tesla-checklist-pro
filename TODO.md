@@ -27,6 +27,19 @@
 - [ ] FAQ page
 - [ ] Sign in / auth flow (both "Sign in" and "Start inspection" currently deep-link to `/app`)
 - [x] Mobile breakpoint pass — `useMediaQuery` hook, 768px breakpoint, responsive across Marketing + InspectionApp
+- [x] Dual-theme system (standard + cyber) — full token swap + ambient animations (scan, flicker, glitch, flag pulse), `ThemeToggle` in Nav + TopBar, pre-React seed to avoid flash
+- [x] Replace fake hero stats strip with source credits (TMC, r/TeslaLounge, Cybertruck Owners, InsideEVs)
+
+## SEO
+
+- [x] Per-route `useSeo` hook — title, description, OG, Twitter, canonical, JSON-LD with cleanup
+- [x] `public/robots.txt` + `public/sitemap.xml` (home + 5 model pages)
+- [x] Per-model landing pages with long-tail slugs (`/model-y-delivery-checklist` etc.) — intro, quick facts, top 5 to inspect, common issues, touchscreen features, NHTSA recall callout, source credits. ~800 words each.
+- [x] Legacy short slugs (`/model-y`) 301-redirect to long-tail via `<Navigate replace>`
+- [ ] Blog / editorial surface for long-tail topic coverage beyond the 5 model pages
+- [ ] Per-page hero image (OG `og:image`) generated or curated — currently no image in meta
+- [ ] Submit sitemap to Google Search Console once domain is live
+- [ ] Per-model checklist variations driven from a per-model item set (currently all 5 pages CTA into the same shared checklist)
 
 ## Design system coverage
 

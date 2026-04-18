@@ -11,11 +11,38 @@ interface ExportArgs {
   notes?: Record<string, string>;
 }
 
-const ACCENT: [number, number, number] = [255, 45, 45];
-const INK_0: [number, number, number] = [10, 11, 13];
-const INK_1: [number, number, number] = [110, 116, 128];
-const OK: [number, number, number] = [0, 140, 95];
-const SKIP: [number, number, number] = [110, 116, 128];
+type RGB = [number, number, number];
+
+const hexToRgb = (hex: string): RGB => {
+  const h = hex.trim().replace('#', '');
+  const full = h.length === 3 ? h.split('').map((c) => c + c).join('') : h;
+  return [
+    parseInt(full.slice(0, 2), 16),
+    parseInt(full.slice(2, 4), 16),
+    parseInt(full.slice(4, 6), 16),
+  ];
+};
+
+const readVar = (name: string, fallback: RGB): RGB => {
+  if (typeof window === 'undefined') return fallback;
+  const raw = getComputedStyle(document.documentElement)
+    .getPropertyValue(name)
+    .trim();
+  if (!raw) return fallback;
+  if (raw.startsWith('#')) return hexToRgb(raw);
+  const m = raw.match(/rgba?\(([^)]+)\)/);
+  if (m) {
+    const parts = m[1].split(',').map((s) => parseFloat(s.trim()));
+    return [parts[0] || 0, parts[1] || 0, parts[2] || 0];
+  }
+  return fallback;
+};
+
+const mixWithWhite = ([r, g, b]: RGB, amount: number): RGB => [
+  Math.round(r + (255 - r) * (1 - amount)),
+  Math.round(g + (255 - g) * (1 - amount)),
+  Math.round(b + (255 - b) * (1 - amount)),
+];
 
 const STATUS_LABEL: Record<Status, string> = {
   pass: 'PASS',
@@ -36,6 +63,14 @@ const filenameStamp = (d: Date) =>
   )}${pad2(d.getMinutes())}`;
 
 export function exportInspectionPdf({ vin, modelLabel, statuses, notes = {} }: ExportArgs) {
+  const ACCENT = readVar('--accent', [255, 45, 45]);
+  const DANGER = readVar('--danger', [255, 45, 45]);
+  const INK_0: RGB = [10, 11, 13];
+  const INK_1: RGB = [110, 116, 128];
+  const OK = readVar('--ok', [0, 140, 95]);
+  const SKIP: RGB = [110, 116, 128];
+  const FLAG_TINT = mixWithWhite(DANGER, 0.08);
+
   const doc = new jsPDF({ unit: 'pt', format: 'letter' });
   const now = new Date();
   const pageW = doc.internal.pageSize.getWidth();
@@ -89,7 +124,7 @@ export function exportInspectionPdf({ vin, modelLabel, statuses, notes = {} }: E
   doc.text(modelLabel, margin + 180, 108);
   doc.setFont('courier', 'normal');
   doc.text(`${doneCount} / ${TOTAL_ITEMS}`, margin + 340, 108);
-  doc.setTextColor(...(flagCount > 0 ? ACCENT : INK_0));
+  doc.setTextColor(...(flagCount > 0 ? DANGER : INK_0));
   doc.text(String(flagCount), margin + 450, 108);
 
   // Summary strip
@@ -112,7 +147,7 @@ export function exportInspectionPdf({ vin, modelLabel, statuses, notes = {} }: E
             content: `Note: ${note.trim()}`,
             colSpan: 3,
             styles: {
-              fillColor: [255, 245, 245],
+              fillColor: FLAG_TINT,
               textColor: INK_0,
               fontSize: 9,
               fontStyle: 'italic',
@@ -193,11 +228,11 @@ export function exportInspectionPdf({ vin, modelLabel, statuses, notes = {} }: E
         const status = typeof raw === 'string' ? raw : '';
         if (status === 'PASS') data.cell.styles.textColor = OK;
         else if (status === 'FLAG') {
-          data.cell.styles.textColor = ACCENT;
-          data.row.cells[0].styles.fillColor = [255, 245, 245];
-          data.row.cells[1].styles.fillColor = [255, 245, 245];
-          data.row.cells[2].styles.fillColor = [255, 245, 245];
-          data.row.cells[3].styles.fillColor = [255, 245, 245];
+          data.cell.styles.textColor = DANGER;
+          data.row.cells[0].styles.fillColor = FLAG_TINT;
+          data.row.cells[1].styles.fillColor = FLAG_TINT;
+          data.row.cells[2].styles.fillColor = FLAG_TINT;
+          data.row.cells[3].styles.fillColor = FLAG_TINT;
         } else if (status === 'SKIP') data.cell.styles.textColor = SKIP;
         else data.cell.styles.textColor = [200, 204, 210];
       },
