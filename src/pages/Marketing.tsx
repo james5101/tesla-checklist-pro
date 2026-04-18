@@ -43,18 +43,23 @@ export const Nav = () => {
           gap: isMobile ? 12 : 32,
         }}
       >
-        <a href="#" style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+        <Link to="/" style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
           <img src={logoMark} width="22" height="22" alt="" />
           <span style={{ fontSize: 14, fontWeight: 600 }}>
             TeslaChecklist<span style={{ color: 'var(--accent)' }}>Pro</span>
           </span>
-        </a>
+        </Link>
         {!isNarrow && (
           <div style={{ display: 'flex', gap: 24, marginLeft: 24 }}>
-            {['Inspection', 'How it works', 'Owners', 'FAQ'].map((l) => (
-              <a key={l} href="#" style={{ fontSize: 13, color: 'var(--fg-1)' }}>
-                {l}
-              </a>
+            {[
+              { label: 'Inspection', to: '/inspection' },
+              { label: 'How it works', to: '/how-it-works' },
+              { label: 'Owners', to: '/owners' },
+              { label: 'FAQ', to: '/faq' },
+            ].map((l) => (
+              <Link key={l.to} to={l.to} style={{ fontSize: 13, color: 'var(--fg-1)' }}>
+                {l.label}
+              </Link>
             ))}
           </div>
         )}
