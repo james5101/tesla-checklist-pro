@@ -23,7 +23,7 @@ Tesla delivery-day inspection web app. Two surfaces: a marketing landing page an
 - `src/styles/tokens.css` — colors, type, spacing, radii, motion + cyber-theme overrides and animations
 - `src/assets/` — logos, checklist pattern, icon SVGs (bundled by Vite; do not link directly in `index.html`)
 - `public/` — `favicon.svg`, `robots.txt`, `sitemap.xml` (served verbatim at site root)
-- `_design/` — original design-system handoff bundle (read-only reference; not imported by app)
+- `.claude/skills/teslachecklistpro-design-system/` — design-system skill (tokens, UI kit, preview HTML, assets). Read-only reference, not imported by the app. Invoke as `/teslachecklistpro-design-system` when designing new UI.
 
 ## Design system rules
 

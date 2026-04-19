@@ -1,0 +1,200 @@
+/* TeslaChecklistPro — Design Tokens (multi-theme) */
+@import url('https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500;600&family=Chakra+Petch:wght@400;500;600;700&display=swap');
+
+/* =================================================================
+   THEME ARCHITECTURE
+   Every theme declares the same token surface. Switch by setting
+   [data-theme="..."] on <html>. Default is "standard".
+   ================================================================= */
+
+:root, html[data-theme="standard"] {
+  /* Surfaces */
+  --bg-0: #0A0B0D; --bg-1: #111216; --bg-2: #191B20; --bg-3: #22252B;
+  --line: #2A2E35; --line-soft: #1D2026;
+  /* Ink */
+  --fg-0: #F5F6F7; --fg-1: #B8BCC4; --fg-2: #6E7480; --fg-3: #3E434C;
+  /* Accent */
+  --accent: #FF2D2D; --accent-hot: #FF5252; --accent-dim: #B31A1A;
+  --accent-glow: rgba(255, 45, 45, 0.18);
+  --accent-2: #FF2D2D;
+  /* Semantic */
+  --ok: #00D18F; --warn: #FFB020; --danger: #FF2D2D; --info: #5AA9FF;
+  /* Type */
+  --font-sans: 'Geist', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'Geist Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+  --font-display: 'Geist', ui-sans-serif, system-ui, sans-serif;
+  --display-weight: 700;
+  --display-tracking: -0.03em;
+  --display-transform: none;
+  /* Shape & motion */
+  --radius-sm: 2px; --radius-md: 4px; --radius-full: 9999px;
+  --shadow-pop: 0 8px 24px rgba(0,0,0,0.6);
+  --shadow-glow: none;
+  --border-width: 1px;
+  --dur-fast: 120ms; --dur-base: 180ms; --dur-slow: 240ms;
+  --ease-out: cubic-bezier(0.2, 0, 0, 1);
+  /* Effects (off in standard) */
+  --bg-overlay: none;
+  --bg-grid: none;
+  --nav-h: 56px;
+  /* Scale */
+  --text-xs: 11px; --text-sm: 13px; --text-base: 15px; --text-md: 17px;
+  --text-lg: 22px; --text-xl: 32px; --text-2xl: 48px; --text-3xl: 72px;
+  --space-1: 4px; --space-2: 8px; --space-3: 12px; --space-4: 16px;
+  --space-5: 20px; --space-6: 24px; --space-8: 32px; --space-10: 40px;
+  --space-14: 56px; --space-20: 80px; --space-30: 120px;
+}
+
+/* =================================================================
+   CYBERPUNK THEME — "NEON OPS"
+   ================================================================= */
+html[data-theme="cyber"] {
+  /* Deep indigo/violet surfaces with magenta undertone */
+  --bg-0: #05020E;
+  --bg-1: #0B0620;
+  --bg-2: #140A2E;
+  --bg-3: #1E0F42;
+  --line: #3A1E6E;
+  --line-soft: #1E0F42;
+  /* Ink stays high-contrast but with a cool cyan tint */
+  --fg-0: #E8FCFF;
+  --fg-1: #9AB8D4;
+  --fg-2: #6878A8;
+  --fg-3: #3E3E6E;
+  /* Accent: neon cyan primary, hot magenta secondary */
+  --accent: #00F0FF;
+  --accent-hot: #6FFBFF;
+  --accent-dim: #00A8B5;
+  --accent-glow: rgba(0, 240, 255, 0.35);
+  --accent-2: #FF2EC8;
+  /* Semantic */
+  --ok: #00FF9C;
+  --warn: #FFD600;
+  --danger: #FF2EC8;
+  --info: #00F0FF;
+  /* Typography — display goes full Chakra Petch, aggressive */
+  --font-display: 'Chakra Petch', 'Geist', sans-serif;
+  --display-weight: 700;
+  --display-tracking: 0.01em;
+  --display-transform: uppercase;
+  /* Sharp shapes, glowing borders */
+  --radius-sm: 0px;
+  --radius-md: 0px;
+  --radius-full: 9999px;
+  --border-width: 1px;
+  --shadow-pop: 0 0 0 1px var(--accent), 0 0 24px var(--accent-glow);
+  --shadow-glow: 0 0 12px var(--accent-glow), 0 0 2px var(--accent);
+  /* Slightly snappier motion */
+  --dur-fast: 80ms; --dur-base: 140ms; --dur-slow: 200ms;
+  --ease-out: cubic-bezier(0.3, 0, 0, 1);
+  /* Effects ON */
+  --bg-grid: linear-gradient(rgba(0, 240, 255, 0.04) 1px, transparent 1px),
+             linear-gradient(90deg, rgba(0, 240, 255, 0.04) 1px, transparent 1px);
+  --bg-overlay: repeating-linear-gradient(0deg, transparent 0, transparent 2px, rgba(0, 240, 255, 0.025) 2px, rgba(0, 240, 255, 0.025) 3px);
+}
+
+/* =================================================================
+   GLOBAL STYLES
+   ================================================================= */
+html, body {
+  background: var(--bg-0); color: var(--fg-0);
+  font-family: var(--font-sans); font-size: var(--text-base);
+  line-height: 1.5; letter-spacing: -0.005em;
+  -webkit-font-smoothing: antialiased; margin: 0;
+  transition: background var(--dur-base) var(--ease-out), color var(--dur-base) var(--ease-out);
+}
+
+/* Cyberpunk ambient overlay — scanlines + grid, fixed, behind content */
+html[data-theme="cyber"] body::before {
+  content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 1;
+  background: var(--bg-overlay);
+  mix-blend-mode: screen; opacity: 0.8;
+}
+html[data-theme="cyber"] body::after {
+  content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 0;
+  background-image: var(--bg-grid);
+  background-size: 40px 40px;
+  mask-image: radial-gradient(ellipse at 50% 30%, black 0%, transparent 70%);
+  opacity: 0.5;
+}
+
+h1,h2,h3,h4,h5,h6 {
+  margin: 0; color: var(--fg-0); font-weight: 600;
+  letter-spacing: -0.02em; line-height: 1.1;
+}
+h1 { font-family: var(--font-display); font-size: var(--text-3xl); font-weight: var(--display-weight); letter-spacing: var(--display-tracking); text-transform: var(--display-transform); }
+h2 { font-family: var(--font-display); font-size: var(--text-2xl); font-weight: var(--display-weight); letter-spacing: var(--display-tracking); text-transform: var(--display-transform); }
+h3 { font-size: var(--text-xl); }
+p { margin: 0; color: var(--fg-1); }
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs); text-transform: uppercase; letter-spacing: 0.12em;
+  color: var(--fg-2); font-weight: 500;
+}
+html[data-theme="cyber"] .eyebrow { color: var(--accent); text-shadow: 0 0 8px var(--accent-glow); }
+
+a { color: var(--fg-0); text-decoration: none; transition: color var(--dur-fast) var(--ease-out); }
+a:hover { color: var(--accent-hot); }
+::selection { background: var(--accent); color: var(--bg-0); }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+/* Buttons */
+.btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 10px 16px;
+  font-family: var(--font-sans); font-size: 13px; font-weight: 500;
+  border-radius: var(--radius-sm);
+  border: var(--border-width) solid var(--line);
+  background: var(--bg-1); color: var(--fg-0);
+  cursor: pointer; transition: all var(--dur-fast) var(--ease-out);
+  position: relative;
+}
+.btn:hover { background: var(--bg-2); }
+.btn--primary {
+  background: var(--accent); border-color: var(--accent); color: var(--bg-0);
+  font-weight: 600;
+}
+.btn--primary:hover { background: var(--accent-hot); border-color: var(--accent-hot); }
+.btn--ghost { background: transparent; border-color: transparent; color: var(--fg-1); }
+.btn--ghost:hover { color: var(--fg-0); background: var(--bg-1); }
+
+/* Cyberpunk button treatment — clipped corners, neon glow, uppercase */
+html[data-theme="cyber"] .btn {
+  font-family: var(--font-mono); text-transform: uppercase; letter-spacing: 0.08em;
+  font-size: 12px; font-weight: 600;
+  clip-path: polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px);
+  border-color: var(--accent);
+  color: var(--accent);
+  background: transparent;
+}
+html[data-theme="cyber"] .btn:hover {
+  background: rgba(0, 240, 255, 0.08);
+  box-shadow: var(--shadow-glow);
+}
+html[data-theme="cyber"] .btn--primary {
+  background: var(--accent); color: var(--bg-0);
+  box-shadow: 0 0 16px var(--accent-glow), inset 0 0 0 1px rgba(255,255,255,0.3);
+}
+html[data-theme="cyber"] .btn--primary:hover {
+  background: var(--accent-hot);
+  box-shadow: 0 0 28px var(--accent-glow), inset 0 0 0 1px rgba(255,255,255,0.5);
+}
+html[data-theme="cyber"] .btn--ghost {
+  border-color: transparent; color: var(--fg-1); clip-path: none;
+}
+
+/* Utility: text with neon glow */
+html[data-theme="cyber"] .cyber-glow {
+  text-shadow: 0 0 12px var(--accent-glow), 0 0 2px var(--accent);
+}
+
+/* Keyframes used across themes */
+@keyframes cyber-flicker {
+  0%, 100% { opacity: 1; }
+  45% { opacity: 1; }
+  47% { opacity: 0.7; }
+  49% { opacity: 1; }
+  52% { opacity: 0.9; }
+  54% { opacity: 1; }
+}
+html[data-theme="cyber"] .cyber-flicker { animation: cyber-flicker 6s infinite; }

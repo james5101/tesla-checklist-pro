@@ -30,7 +30,7 @@ lerna-debug.log*
 .env.*.local
 
 # Agent / tool state
-.claude/
+.claude/settings.local.json
 
 # Editor / OS
 .vscode/*

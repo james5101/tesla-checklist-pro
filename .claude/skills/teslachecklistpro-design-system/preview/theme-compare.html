@@ -1,0 +1,71 @@
+<!doctype html><html><head>
+<link rel="stylesheet" href="../colors_and_type.css?v=2">
+<style>
+  body { margin: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 0; min-height: 260px; font-family: var(--font-sans); }
+  .pane { padding: 20px; position: relative; overflow: hidden; }
+  .pane.std { background: #0A0B0D; color: #F5F6F7; }
+  .pane.cbr {
+    background:
+      linear-gradient(rgba(0,240,255,0.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,240,255,0.06) 1px, transparent 1px),
+      radial-gradient(ellipse at 80% 0%, rgba(255,46,200,0.2) 0%, transparent 50%),
+      #05020E;
+    background-size: 24px 24px, 24px 24px, auto, auto;
+    color: #E8FCFF;
+  }
+  .pane.cbr::after {
+    content: ''; position: absolute; inset: 0; pointer-events: none;
+    background: repeating-linear-gradient(0deg, transparent 0 2px, rgba(0,240,255,0.03) 2px 3px);
+  }
+  .label {
+    font-family: 'Geist Mono', ui-monospace, monospace;
+    font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .std .label { color: #6E7480; }
+  .cbr .label { color: #00F0FF; text-shadow: 0 0 8px rgba(0,240,255,0.5); }
+  .std .label::before { content: '● '; color: #FF2D2D; }
+  .cbr .label::before { content: '● '; }
+  h3 { margin: 0 0 8px; font-size: 24px; font-weight: 700; line-height: 1.05; letter-spacing: -0.02em; }
+  .cbr h3 { font-family: 'Chakra Petch', sans-serif; text-transform: uppercase; letter-spacing: 0.01em; }
+  .std h3 span { color: #FF2D2D; }
+  .cbr h3 span { color: #00F0FF; text-shadow: 0 0 12px rgba(0,240,255,0.6); }
+  p { margin: 0; font-size: 12px; line-height: 1.5; }
+  .std p { color: #B8BCC4; }
+  .cbr p { color: #9AB8D4; font-family: 'Geist Mono', monospace; }
+  .btn {
+    display: inline-block; margin-top: 16px;
+    padding: 8px 14px; font-size: 11px; font-weight: 600;
+    text-decoration: none;
+  }
+  .std .btn { background: #FF2D2D; color: #0A0B0D; border: 1px solid #FF2D2D; }
+  .cbr .btn {
+    background: #00F0FF; color: #05020E;
+    border: 1px solid #00F0FF;
+    font-family: 'Geist Mono', monospace; text-transform: uppercase; letter-spacing: 0.08em;
+    clip-path: polygon(6px 0, 100% 0, 100% calc(100% - 6px), calc(100% - 6px) 100%, 0 100%, 0 6px);
+    box-shadow: 0 0 16px rgba(0,240,255,0.4);
+  }
+  .tag {
+    position: absolute; top: 10px; right: 12px;
+    font-family: 'Geist Mono', monospace; font-size: 9px; letter-spacing: 0.12em;
+  }
+  .std .tag { color: #3E434C; }
+  .cbr .tag { color: #00F0FF; }
+</style>
+</head><body>
+<div class="pane std">
+  <div class="tag">THEME · STANDARD</div>
+  <div class="label">DELIVERY DAY TOOLKIT</div>
+  <h3>Don't sign until you've checked <span>everything.</span></h3>
+  <p>A 147-point delivery inspection, built from 4 years of Tesla forum threads, service bulletins, and owner reports.</p>
+  <a class="btn" href="#">Start inspection →</a>
+</div>
+<div class="pane cbr">
+  <div class="tag">THEME · CYBER</div>
+  <div class="label">// DELIVERY DAY TOOLKIT</div>
+  <h3>Don't sign until every <span>byte</span> checks out.</h3>
+  <p>// 147 checks loaded. Operator mode online. Scan the unit. Log the defects.</p>
+  <a class="btn" href="#">Start inspection →</a>
+</div>
+</body></html>

@@ -1,0 +1,31 @@
+<!doctype html><html><head>
+<link rel="stylesheet" href="../colors_and_type.css?v=2">
+<style>
+  body { margin:0; display: grid; grid-template-columns: 1fr 1fr; }
+  .pane { padding: 20px; display: flex; gap: 10px; flex-wrap: wrap; min-height: 150px; align-items: flex-end; }
+  .std { background: #0A0B0D; }
+  .cbr { background:
+      linear-gradient(rgba(0,240,255,0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,240,255,0.05) 1px, transparent 1px),
+      #05020E;
+      background-size: 20px 20px;
+  }
+  .s { width: 70px; height: 60px; display: flex; flex-direction: column; justify-content: flex-end; padding: 8px; border: 1px solid; }
+  .lbl { font-family: 'Geist Mono', monospace; font-size: 9px; opacity: 0.8; }
+  .tag { position: absolute; left: 20px; top: 6px; font-family: 'Geist Mono', monospace; font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; }
+  .std .tag { color: #6E7480; } .cbr .tag { color: #00F0FF; }
+  .pane { position: relative; }
+</style></head><body>
+<div class="pane std"><div class="tag">● Standard palette</div>
+  <div class="s" style="background:#0A0B0D;border-color:#2A2E35;color:#F5F6F7"><span class="lbl">bg-0</span></div>
+  <div class="s" style="background:#111216;border-color:#2A2E35;color:#F5F6F7"><span class="lbl">bg-1</span></div>
+  <div class="s" style="background:#FF2D2D;border-color:#FF2D2D;color:#0A0B0D"><span class="lbl">accent</span></div>
+  <div class="s" style="background:#00D18F;border-color:#00D18F;color:#0A0B0D"><span class="lbl">ok</span></div>
+</div>
+<div class="pane cbr"><div class="tag">● Cyber palette</div>
+  <div class="s" style="background:#05020E;border-color:#3A1E6E;color:#E8FCFF"><span class="lbl">bg-0</span></div>
+  <div class="s" style="background:#140A2E;border-color:#3A1E6E;color:#E8FCFF"><span class="lbl">bg-2</span></div>
+  <div class="s" style="background:#00F0FF;border-color:#00F0FF;color:#05020E;box-shadow:0 0 16px rgba(0,240,255,0.4)"><span class="lbl">accent</span></div>
+  <div class="s" style="background:#FF2EC8;border-color:#FF2EC8;color:#05020E;box-shadow:0 0 14px rgba(255,46,200,0.5)"><span class="lbl">accent-2</span></div>
+</div>
+</body></html>

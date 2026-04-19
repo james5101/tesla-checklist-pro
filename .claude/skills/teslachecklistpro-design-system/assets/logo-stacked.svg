@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 120" fill="none">
+  <defs><linearGradient id="g3" x1="0" y1="0" x2="48" y2="48" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#FF5252"></stop><stop offset="1" stop-color="#C21818"></stop></linearGradient></defs>
+  <g transform="translate(96 8)"><path d="M28 4 L10 28 L22 28 L20 44 L38 20 L26 20 L32 4 Z" fill="url(#g3)"></path></g>
+  <text x="120" y="92" text-anchor="middle" font-family="Geist, sans-serif" font-weight="600" font-size="20" letter-spacing="-0.3" fill="#F5F6F7">TeslaChecklist<tspan fill="#FF2D2D">Pro</tspan></text>
+</svg>
