@@ -28,7 +28,7 @@
 - [x] Owners page — `/owners`, source list + maintenance cadence + contribute CTA
 - [x] FAQ page — `/faq`, 12 Q&A with accordion + `FAQPage` JSON-LD
 - [x] Shared `InfoPage` layout primitive for info pages
-- [ ] Replace `feedback@teslachecklistpro.com` with a real mailbox (referenced on Owners page)
+- [x] Wire `feedback@teslachecklistpro.com` to a real mailbox (forwards to personal inbox)
 - [ ] Sign in / auth flow (both "Sign in" and "Start inspection" currently deep-link to `/app`)
 - [x] Mobile breakpoint pass — `useMediaQuery` hook, 768px breakpoint, responsive across Marketing + InspectionApp
 - [x] Dual-theme system (standard + cyber) — full token swap + ambient animations (scan, flicker, glitch, flag pulse), `ThemeToggle` in Nav + TopBar, pre-React seed to avoid flash

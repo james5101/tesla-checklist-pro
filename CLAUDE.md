@@ -53,7 +53,7 @@ Hosted on Vercel at [teslachecklistpro.com](https://teslachecklistpro.com). Repo
 
 ## Known gaps
 
-See `TODO.md`. Most notable: photo capture per item is still cosmetic, per-model checklist variations aren't wired (one shared 147-point list across all 5 models), Sign in is still a placeholder link to `/app`, and `feedback@teslachecklistpro.com` on the Owners page needs a real mailbox before launch promotion.
+See `TODO.md`. Most notable: photo capture per item is still cosmetic, per-model checklist variations aren't wired (one shared 147-point list across all 5 models), and Sign in is still a placeholder link to `/app`.
 
 ## Windows + npm note
 
