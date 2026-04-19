@@ -28,6 +28,20 @@ export default function HowItWorks() {
     description:
       'The TeslaChecklistPro workflow: pick your model, walk a 147-point inspection across six categories, export a PDF for your advisor. Offline, free, no signup.',
     canonical: 'https://teslachecklistpro.com/how-it-works',
+    jsonLd: {
+      '@context': 'https://schema.org',
+      '@type': 'HowTo',
+      name: 'How to inspect a Tesla on delivery day',
+      description:
+        'A three-step workflow for walking a 147-point inspection during Tesla delivery and handing findings to your advisor before you sign.',
+      totalTime: 'PT30M',
+      step: STEPS.map((s, i) => ({
+        '@type': 'HowToStep',
+        position: i + 1,
+        name: s.t,
+        text: s.d,
+      })),
+    },
   });
 
   return (

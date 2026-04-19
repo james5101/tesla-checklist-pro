@@ -5,6 +5,7 @@ interface SeoOptions {
   description: string;
   canonical?: string;
   jsonLd?: object;
+  robots?: string;
 }
 
 const setMeta = (selector: string, attr: string, value: string) => {
@@ -28,7 +29,7 @@ const setLink = (rel: string, href: string) => {
   el.setAttribute('href', href);
 };
 
-export function useSeo({ title, description, canonical, jsonLd }: SeoOptions) {
+export function useSeo({ title, description, canonical, jsonLd, robots }: SeoOptions) {
   useEffect(() => {
     document.title = title;
     setMeta('meta[name="description"]', 'content', description);
@@ -41,6 +42,17 @@ export function useSeo({ title, description, canonical, jsonLd }: SeoOptions) {
       setMeta('meta[property="og:url"]', 'content', canonical);
     }
 
+    let robotsEl: HTMLMetaElement | null = null;
+    let robotsWasPresent = false;
+    if (robots) {
+      const existing = document.head.querySelector<HTMLMetaElement>('meta[name="robots"]');
+      robotsWasPresent = !!existing;
+      robotsEl = existing ?? document.createElement('meta');
+      robotsEl.setAttribute('name', 'robots');
+      robotsEl.setAttribute('content', robots);
+      if (!existing) document.head.appendChild(robotsEl);
+    }
+
     let script: HTMLScriptElement | null = null;
     if (jsonLd) {
       script = document.createElement('script');
@@ -51,6 +63,7 @@ export function useSeo({ title, description, canonical, jsonLd }: SeoOptions) {
     }
     return () => {
       if (script) script.remove();
+      if (robotsEl && !robotsWasPresent) robotsEl.remove();
     };
-  }, [title, description, canonical, jsonLd]);
+  }, [title, description, canonical, jsonLd, robots]);
 }

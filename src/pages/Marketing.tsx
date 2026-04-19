@@ -170,7 +170,7 @@ const Hero = () => {
           >
             {[
               { v: 'TeslaMotorsClub', l: 'Owner forum · est. 2006' },
-              { v: 'r/TeslaLounge', l: 'Reddit · 180k members' },
+              { v: 'r/TeslaLounge', l: 'Reddit · general owner community' },
               { v: 'Cybertruck Owners', l: 'Owners club forum' },
               { v: 'InsideEVs', l: 'Publication · coverage' },
             ].map((s) => (
@@ -253,7 +253,7 @@ const FeatureGrid = () => {
             maxWidth: 720,
           }}
         >
-          Six systems. One hundred forty-seven checks.
+          Six systems. 147 checks.
         </h2>
         <div
           style={{
@@ -376,6 +376,21 @@ const HowItWorks = () => {
   );
 };
 
+const FOOTER_CHECKLISTS: Array<{ slug: string; name: string }> = [
+  { slug: 'model-s-delivery-checklist', name: 'Model S' },
+  { slug: 'model-3-delivery-checklist', name: 'Model 3' },
+  { slug: 'model-x-delivery-checklist', name: 'Model X' },
+  { slug: 'model-y-delivery-checklist', name: 'Model Y' },
+  { slug: 'cybertruck-delivery-checklist', name: 'Cybertruck' },
+];
+
+const FOOTER_INFO: Array<{ to: string; label: string }> = [
+  { to: '/inspection', label: 'Tesla delivery inspection' },
+  { to: '/how-it-works', label: 'How it works' },
+  { to: '/owners', label: 'For owners' },
+  { to: '/faq', label: 'FAQ' },
+];
+
 export const Footer = () => {
   const isMobile = useIsMobile();
   return (
@@ -385,18 +400,65 @@ export const Footer = () => {
           maxWidth: 1200,
           margin: '0 auto',
           padding: isMobile ? '32px 20px 0' : '32px 40px 0',
-          display: 'flex',
-          flexDirection: isMobile ? 'column' : 'row',
-          gap: isMobile ? 8 : 0,
-          justifyContent: 'space-between',
           borderTop: '1px solid var(--line)',
           fontFamily: 'var(--font-mono)',
           fontSize: 11,
           color: 'var(--fg-2)',
         }}
       >
-        <span>© 2026 TeslaChecklistPro · Not affiliated with Tesla, Inc.</span>
-        <span>BUILD 4.2.18 · ALL SYSTEMS NOMINAL</span>
+        <div
+          style={{
+            display: 'grid',
+            gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr',
+            gap: isMobile ? 24 : 48,
+            paddingBottom: 24,
+          }}
+        >
+          <div>
+            <div style={{ color: 'var(--fg-1)', marginBottom: 10, letterSpacing: '0.04em' }}>
+              CHECKLISTS
+            </div>
+            <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'grid', gap: 6 }}>
+              {FOOTER_CHECKLISTS.map((m) => (
+                <li key={m.slug}>
+                  <Link
+                    to={`/${m.slug}`}
+                    style={{ color: 'var(--fg-2)', textDecoration: 'none' }}
+                  >
+                    {m.name} delivery checklist
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div>
+            <div style={{ color: 'var(--fg-1)', marginBottom: 10, letterSpacing: '0.04em' }}>
+              ABOUT
+            </div>
+            <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'grid', gap: 6 }}>
+              {FOOTER_INFO.map((l) => (
+                <li key={l.to}>
+                  <Link to={l.to} style={{ color: 'var(--fg-2)', textDecoration: 'none' }}>
+                    {l.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: isMobile ? 'column' : 'row',
+            gap: isMobile ? 8 : 0,
+            justifyContent: 'space-between',
+            borderTop: '1px solid var(--line)',
+            paddingTop: 16,
+          }}
+        >
+          <span>© 2026 TeslaChecklistPro · Not affiliated with Tesla, Inc.</span>
+          <span>BUILD 4.2.18 · ALL SYSTEMS NOMINAL</span>
+        </div>
       </div>
     </footer>
   );
@@ -433,7 +495,7 @@ const HOWTO_JSONLD = {
 
 export default function Marketing() {
   useSeo({
-    title: 'TeslaChecklistPro — Free 147-point Tesla delivery inspection checklist',
+    title: 'TeslaChecklistPro — 147-point Tesla delivery inspection checklist',
     description:
       'Free delivery-day inspection checklist for every Tesla: Model S, 3, X, Y, and Cybertruck. 147 points sourced from owner forums. Export a PDF for your advisor. No signup.',
     canonical: 'https://teslachecklistpro.com/',

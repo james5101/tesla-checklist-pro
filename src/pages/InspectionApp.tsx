@@ -6,6 +6,7 @@ import { CATEGORIES, ITEMS, TOTAL_ITEMS, type CategoryId } from '../data/checkli
 import { ModelSilhouette } from '../components/ModelSilhouette';
 import { ThemeToggle } from '../components/ThemeToggle';
 import { useIsMobile } from '../hooks/useMediaQuery';
+import { useSeo } from '../hooks/useSeo';
 import {
   loadSession,
   saveSession,
@@ -739,6 +740,12 @@ const InspectionView = ({
 };
 
 export default function InspectionApp() {
+  useSeo({
+    title: 'TeslaChecklistPro — inspection app',
+    description: 'Tesla delivery-day inspection app. Offline-capable, no signup.',
+    robots: 'noindex, nofollow',
+  });
+
   const isMobile = useIsMobile();
   const [model, setModel] = useState<Model | null>(null);
   const [category, setCategory] = useState<CategoryId>('exterior');

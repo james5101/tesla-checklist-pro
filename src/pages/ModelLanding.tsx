@@ -347,7 +347,7 @@ const MODELS: Record<string, ModelCopy> = {
     silhouetteId: 'model-y',
     tagline: 'Performance, Long Range, and RWD delivery inspection',
     intro:
-      "The Model Y is the best-selling car in the world, which also makes it the Tesla with the most delivery-day issues reported to owner forums. Taking delivery of a 2026 RWD, Long Range, or Performance — all on the Juniper refresh platform? This checklist walks every panel, seal, software entitlement, and option item Tesla inspectors sometimes miss — built from complaints posted to r/TeslaModelY, r/TeslaLounge, and the TeslaMotorsClub Y forum. Plan on 20–30 minutes in the delivery bay before you tap 'Accept Delivery.'",
+      "The Model Y is one of the best-selling cars globally, which also makes it the Tesla with the most delivery-day issues reported to owner forums. Taking delivery of a 2026 RWD, Long Range, or Performance — all on the Juniper refresh platform? This checklist walks every panel, seal, software entitlement, and option item Tesla inspectors sometimes miss — built from complaints posted to r/TeslaModelY, r/TeslaLounge, and the TeslaMotorsClub Y forum. Plan on 20–30 minutes in the delivery bay before you tap 'Accept Delivery.'",
     quickFacts: [
       { label: 'Model year', value: '2026 (Juniper refresh)' },
       { label: 'Trims', value: 'RWD · Long Range AWD · Performance' },
@@ -516,7 +516,7 @@ const MODELS: Record<string, ModelCopy> = {
       {
         title: 'Accelerator pedal pad',
         detail:
-          "Subject to a physical recall (pedal pad dislodging on early builds). Your VIN should already have the remediated hardware — confirm the pedal feels firm and doesn't shift under your foot.",
+          "Early builds were subject to a physical recall (pedal pad could dislodge). Your VIN should already have the remediated hardware — confirm the pedal feels firm and doesn't shift under your foot. Verify against NHTSA recalls by VIN before signing.",
       },
       {
         title: 'Light bar and full-width signatures',
@@ -579,8 +579,8 @@ export default function ModelLanding() {
 
 function ModelLandingContent({ model }: { model: ModelCopy }) {
   const isMobile = useIsMobile();
-  const title = `${model.name} Delivery Checklist — 147 Points to Inspect Before You Sign`;
-  const description = `${model.name} delivery inspection checklist: 147 points sourced from owner forums. Covers ${model.tagline.toLowerCase()}. Free PDF export, no signup.`;
+  const title = `${model.name} delivery checklist — 147 points to inspect before you sign`;
+  const description = `${model.name} delivery inspection checklist: 147 points sourced from owner forums. Covers ${model.tagline}. Free PDF export, no signup.`;
   const canonical = `https://teslachecklistpro.com/${model.slug}`;
 
   const jsonLd = {
