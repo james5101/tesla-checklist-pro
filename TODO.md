@@ -22,9 +22,13 @@
 
 ## Marketing site
 
-- [ ] Wire nav links (Inspection, How it works, Owners, FAQ) to real sections / pages
-- [ ] Owners page
-- [ ] FAQ page
+- [x] Wire nav links (Inspection, How it works, Owners, FAQ) to real pages
+- [x] Inspection page — `/inspection`, 6-category breakdown with sample items, cross-links to per-model pages
+- [x] How it works page — `/how-it-works`, 3-step workflow + methodology + under-the-hood
+- [x] Owners page — `/owners`, source list + maintenance cadence + contribute CTA
+- [x] FAQ page — `/faq`, 12 Q&A with accordion + `FAQPage` JSON-LD
+- [x] Shared `InfoPage` layout primitive for info pages
+- [ ] Replace `feedback@teslachecklistpro.com` with a real mailbox (referenced on Owners page)
 - [ ] Sign in / auth flow (both "Sign in" and "Start inspection" currently deep-link to `/app`)
 - [x] Mobile breakpoint pass — `useMediaQuery` hook, 768px breakpoint, responsive across Marketing + InspectionApp
 - [x] Dual-theme system (standard + cyber) — full token swap + ambient animations (scan, flicker, glitch, flag pulse), `ThemeToggle` in Nav + TopBar, pre-React seed to avoid flash
@@ -33,12 +37,13 @@
 ## SEO
 
 - [x] Per-route `useSeo` hook — title, description, OG, Twitter, canonical, JSON-LD with cleanup
-- [x] `public/robots.txt` + `public/sitemap.xml` (home + 5 model pages)
+- [x] `public/robots.txt` + `public/sitemap.xml` (home + 5 model pages + 4 info pages)
 - [x] Per-model landing pages with long-tail slugs (`/model-y-delivery-checklist` etc.) — intro, quick facts, top 5 to inspect, common issues, touchscreen features, NHTSA recall callout, source credits. ~800 words each.
 - [x] Legacy short slugs (`/model-y`) 301-redirect to long-tail via `<Navigate replace>`
+- [x] FAQ page emits `FAQPage` JSON-LD for rich-result eligibility
 - [ ] Blog / editorial surface for long-tail topic coverage beyond the 5 model pages
 - [ ] Per-page hero image (OG `og:image`) generated or curated — currently no image in meta
-- [ ] Submit sitemap to Google Search Console once domain is live
+- [ ] Submit sitemap to Google Search Console now that domain is live
 - [ ] Per-model checklist variations driven from a per-model item set (currently all 5 pages CTA into the same shared checklist)
 
 ## Design system coverage
@@ -50,8 +55,12 @@
 
 ## Infra / code quality
 
+- [x] Deploy to Vercel at teslachecklistpro.com, SPA fallback via `vercel.json` catch-all rewrite
+- [x] Favicon wired from `public/favicon.svg` (prior link pointed at `/src/assets/...` which only worked in dev)
+- [x] GitHub remote set up at `james5101/tesla-checklist-pro` on `master`
+- [x] Vercel Analytics — `@vercel/analytics` + `<Analytics />` in `BrowserRouter`; enable in dashboard to start collecting
 - [ ] Local-host Geist fonts instead of Google CDN (brand README flags licensing)
-- [ ] Extract shared layout primitives (Container, Section, Stack) — right now inline styles repeat `maxWidth: 1200, padding: '0 40px'`
+- [x] Shared layout primitive for info pages (`InfoPage` + `Section`); home/model-landing still repeat inline container styles
 - [ ] Lint setup (ESLint + Prettier)
 - [ ] Unit tests for inspection state (pass/flag/skip toggle, status-toggling-off)
 - [ ] Playwright smoke test: home → pick Model 3 → flag EXT_004 → verify flagged count

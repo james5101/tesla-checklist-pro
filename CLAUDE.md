@@ -5,7 +5,7 @@ Tesla delivery-day inspection web app. Two surfaces: a marketing landing page an
 ## Stack
 
 - Vite + React 18 + TypeScript
-- react-router-dom — routes: `/` (marketing), `/app` (inspection), `/:slug` (per-model SEO landings)
+- react-router-dom — routes: `/` (marketing), `/app` (inspection), `/inspection`, `/how-it-works`, `/owners`, `/faq` (info pages), `/:slug` (per-model SEO landings; catch-all, must stay last)
 - No CSS framework — design tokens live as CSS variables in `src/styles/tokens.css`, component styling is inline `style={{…}}` (matches the design prototype verbatim)
 - Dual theme (standard + cyber) — toggled via `html[data-theme]`, seeded pre-React in `index.html` to avoid flash
 
@@ -14,13 +14,15 @@ Tesla delivery-day inspection web app. Two surfaces: a marketing landing page an
 - `src/pages/Marketing.tsx` — Nav, Hero, FeatureGrid, HowItWorks, Footer. `Nav` and `Footer` are exported for reuse on model-landing pages.
 - `src/pages/InspectionApp.tsx` — TopBar, ModelPicker, SidebarNav, InspectionView
 - `src/pages/ModelLanding.tsx` — per-model SEO landing pages (`/model-y-delivery-checklist` etc.). All 5 Tesla models share one template; content is data-driven from the `MODELS` record. Old short slugs (`/model-y`) redirect via `LEGACY_REDIRECTS`.
+- `src/pages/Inspection.tsx`, `HowItWorks.tsx`, `Owners.tsx`, `Faq.tsx` — info pages linked from the Nav. Each calls `useSeo` for per-route title/meta/canonical; Faq ships `FAQPage` JSON-LD.
+- `src/components/InfoPage.tsx` — shared hero + CTA layout primitive used by the four info pages, plus a small `Section` helper for eyebrow/title/body blocks.
 - `src/components/Icon.tsx` — shared 24×24 / 1.5px-stroke SVG wrapper (Lucide-style)
 - `src/components/ThemeToggle.tsx` — standard↔cyber theme switcher, mounted in marketing Nav and app TopBar
 - `src/hooks/useSeo.ts` — sets document.title, meta tags (description, OG, Twitter), canonical link, JSON-LD per route
 - `src/hooks/useTheme.ts` — reads/writes `html[data-theme]` with MutationObserver so other components react to changes
 - `src/styles/tokens.css` — colors, type, spacing, radii, motion + cyber-theme overrides and animations
-- `src/assets/` — logos, checklist pattern, icon SVGs
-- `public/` — `robots.txt`, `sitemap.xml` (served at site root)
+- `src/assets/` — logos, checklist pattern, icon SVGs (bundled by Vite; do not link directly in `index.html`)
+- `public/` — `favicon.svg`, `robots.txt`, `sitemap.xml` (served verbatim at site root)
 - `_design/` — original design-system handoff bundle (read-only reference; not imported by app)
 
 ## Design system rules
@@ -42,9 +44,16 @@ Enforce these in every change:
 - `npm run build` — typecheck + production build
 - `npm run preview` — serve the production build
 
+## Deployment
+
+Hosted on Vercel at [teslachecklistpro.com](https://teslachecklistpro.com). Repo: `https://github.com/james5101/tesla-checklist-pro` (remote `origin`, branch `master`).
+
+- `vercel.json` — single SPA catch-all rewrite. Static files (favicon, sitemap, robots, hashed /assets/*) are served first by Vercel's filesystem check; only unknown paths fall through to `/index.html` so React Router can handle them. Vercel `source` uses path-to-regexp — no regex lookaheads.
+- `@vercel/analytics` — `<Analytics />` is mounted inside `BrowserRouter` in `src/main.tsx`. Enable in the Vercel project dashboard for pageview data to start flowing.
+
 ## Known gaps
 
-See `TODO.md`. Most notable: photo capture per item is still cosmetic, per-model checklist variations aren't wired (one shared 147-point list across all 5 models), and auth/Owners/FAQ pages are placeholders.
+See `TODO.md`. Most notable: photo capture per item is still cosmetic, per-model checklist variations aren't wired (one shared 147-point list across all 5 models), Sign in is still a placeholder link to `/app`, and `feedback@teslachecklistpro.com` on the Owners page needs a real mailbox before launch promotion.
 
 ## Windows + npm note
 
