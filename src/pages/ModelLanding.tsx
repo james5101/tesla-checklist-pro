@@ -3,6 +3,7 @@ import { Nav, Footer } from './Marketing';
 import { useSeo } from '../hooks/useSeo';
 import { useIsMobile } from '../hooks/useMediaQuery';
 import { ModelSilhouette } from '../components/ModelSilhouette';
+import { AdSlot } from '../components/AdSlot';
 
 interface QuickFact {
   label: string;
@@ -855,6 +856,12 @@ function ModelLandingContent({ model }: { model: ModelCopy }) {
               );
             })}
           </div>
+        </div>
+      </section>
+
+      <section style={{ borderBottom: '1px solid var(--line)' }}>
+        <div style={container}>
+          <AdSlot slotId="7278772135" />
         </div>
       </section>
 
