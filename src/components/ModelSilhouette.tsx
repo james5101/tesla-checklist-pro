@@ -11,6 +11,9 @@ type ModelId = 'model-s' | 'model-3' | 'model-x' | 'model-y' | 'cybertruck';
 // - strip width/height so the SVG scales to its container via viewBox
 // - force fill="currentColor" so the dual-theme color tokens flow through
 //   (original source has no explicit fill, defaulting to #000 in dark theme)
+// - opacity 0.55 — "muted solid" variant picked from /preview/silhouettes.
+//   Keeps the filled shape legible without the detail feeling heavy at
+//   thumbnail size on the model picker.
 function prepare(raw: string): string {
   return raw
     .replace(/<\?xml[^?]*\?>/g, '')
@@ -18,8 +21,9 @@ function prepare(raw: string): string {
     .replace(/<svg\b([^>]*)>/i, (_m, attrs: string) => {
       const cleaned = attrs
         .replace(/\s(width|height)="[^"]*"/gi, '')
-        .replace(/\sfill="[^"]*"/gi, '');
-      return `<svg${cleaned} fill="currentColor">`;
+        .replace(/\sfill="[^"]*"/gi, '')
+        .replace(/\sopacity="[^"]*"/gi, '');
+      return `<svg${cleaned} fill="currentColor" opacity="0.55">`;
     })
     .trim();
 }
