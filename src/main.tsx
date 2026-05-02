@@ -13,11 +13,13 @@ import Accessories from './pages/Accessories';
 import ArticleDeliveryDefects from './pages/ArticleDeliveryDefects';
 import ArticleWhatsIncluded from './pages/ArticleWhatsIncluded';
 import ArticleDeliveryTimeline from './pages/ArticleDeliveryTimeline';
+import { ScrollToTop } from './components/ScrollToTop';
 import './styles/tokens.css';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <BrowserRouter>
+      <ScrollToTop />
       <Routes>
         <Route path="/" element={<Marketing />} />
         <Route path="/app" element={<InspectionApp />} />
