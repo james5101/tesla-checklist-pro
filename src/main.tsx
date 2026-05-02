@@ -9,6 +9,10 @@ import Faq from './pages/Faq';
 import HowItWorks from './pages/HowItWorks';
 import Inspection from './pages/Inspection';
 import Owners from './pages/Owners';
+import Accessories from './pages/Accessories';
+import ArticleDeliveryDefects from './pages/ArticleDeliveryDefects';
+import ArticleWhatsIncluded from './pages/ArticleWhatsIncluded';
+import ArticleDeliveryTimeline from './pages/ArticleDeliveryTimeline';
 import './styles/tokens.css';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
@@ -21,6 +25,10 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
         <Route path="/how-it-works" element={<HowItWorks />} />
         <Route path="/owners" element={<Owners />} />
         <Route path="/faq" element={<Faq />} />
+        <Route path="/tesla-delivery-day-accessories" element={<Accessories />} />
+        <Route path="/tesla-delivery-defects-what-to-do" element={<ArticleDeliveryDefects />} />
+        <Route path="/whats-included-with-new-tesla" element={<ArticleWhatsIncluded />} />
+        <Route path="/tesla-delivery-day-timeline" element={<ArticleDeliveryTimeline />} />
         <Route path="/:slug" element={<ModelLanding />} />
       </Routes>
       <Analytics />
