@@ -24,10 +24,10 @@ export const Nav = () => {
         height: 56,
         zIndex: 100,
         background: scrolled
-          ? 'color-mix(in srgb, var(--bg-0) 72%, transparent)'
+          ? 'color-mix(in srgb, var(--bg-0) 95%, transparent)'
           : 'transparent',
-        backdropFilter: scrolled ? 'blur(16px)' : 'none',
-        WebkitBackdropFilter: scrolled ? 'blur(16px)' : 'none',
+        backdropFilter: scrolled ? 'blur(20px)' : 'none',
+        WebkitBackdropFilter: scrolled ? 'blur(20px)' : 'none',
         borderBottom: scrolled ? '1px solid var(--line)' : '1px solid transparent',
         transition: 'all 180ms cubic-bezier(0.2,0,0,1)',
       }}
