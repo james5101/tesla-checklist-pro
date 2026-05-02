@@ -23,9 +23,7 @@ export const Nav = () => {
         right: 0,
         height: 56,
         zIndex: 100,
-        background: scrolled
-          ? 'color-mix(in srgb, var(--bg-0) 95%, transparent)'
-          : 'transparent',
+        background: scrolled ? 'var(--bg-0)' : 'transparent',
         backdropFilter: scrolled ? 'blur(20px)' : 'none',
         WebkitBackdropFilter: scrolled ? 'blur(20px)' : 'none',
         borderBottom: scrolled ? '1px solid var(--line)' : '1px solid transparent',
