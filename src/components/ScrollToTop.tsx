@@ -17,8 +17,11 @@ export function ScrollToTop() {
   const { pathname } = useLocation();
 
   useEffect(() => {
-    // 'instant' avoids smooth-scroll feeling laggy on slow devices.
-    window.scrollTo({ top: 0, left: 0, behavior: 'instant' as ScrollBehavior });
+    // Prevent the browser's built-in scroll restoration from fighting us.
+    if ('scrollRestoration' in window.history) {
+      window.history.scrollRestoration = 'manual';
+    }
+    window.scrollTo(0, 0);
   }, [pathname]);
 
   return null;
