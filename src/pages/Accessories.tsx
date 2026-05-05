@@ -217,23 +217,6 @@ function AccessoryCard({ item, index }: { item: Accessory; index: number }) {
         </div>
       )}
 
-      {/* Brands */}
-      <div style={{ marginTop: 16 }}>
-        <div
-          style={{
-            fontSize: 11,
-            fontFamily: 'var(--font-mono)',
-            color: 'var(--fg-2)',
-            textTransform: 'uppercase',
-            letterSpacing: '0.06em',
-            marginBottom: 6,
-          }}
-        >
-          Brands owners name
-        </div>
-        <div style={{ fontSize: 14, color: 'var(--fg-1)' }}>{item.brands.join(' · ')}</div>
-      </div>
-
       {/* Model-specific note, if any */}
       {item.modelNote && (
         <div
@@ -481,15 +464,11 @@ export default function Accessories() {
       }
       lede={INTRO}
     >
-      {/* FTC disclosure — always prominent, up top */}
-      <CalloutCard kind="accent" eyebrow="AFFILIATE DISCLOSURE">
-        {FTC_DISCLOSURE}
-      </CalloutCard>
-
-      {/* Fitment warning — high-prominence since Highland/Juniper break "fits all" listings */}
-      <CalloutCard kind="warning" eyebrow="HIGHLAND & JUNIPER FITMENT">
-        {FITMENT_WARNING}
-      </CalloutCard>
+      {/* FTC + fitment notice — single compact bar */}
+      <p style={{ fontSize: 13, color: 'var(--fg-2)', lineHeight: 1.6, marginBottom: 32 }}>
+        <span style={{ color: 'var(--fg-1)' }}>Affiliate disclosure:</span> {FTC_DISCLOSURE}{' '}
+        <span style={{ color: 'var(--warn)' }}>Fitment note:</span> {FITMENT_WARNING}
+      </p>
 
       <Section
         eyebrow={`${ACCESSORIES.length} RECOMMENDED`}
@@ -506,75 +485,68 @@ export default function Accessories() {
         eyebrow={`${SKIP_LIST.length} COMMONLY PUSHED · SKIP`}
         title="What we'd skip — with receipts."
       >
-        <p
-          style={{
-            fontSize: 14,
-            color: 'var(--fg-2)',
-            lineHeight: 1.6,
-            marginBottom: 20,
-            maxWidth: 720,
-          }}
-        >
-          Every item below is a category TeslaChecklistPro will never take affiliate commissions
-          on. Not because they're illegal or dangerous — because owner-forum sentiment, linked in
-          each entry, consistently warns against them.
-        </p>
-        <div>
+        <div style={{ marginTop: 16 }}>
           {SKIP_LIST.map((item, i) => (
             <SkipCard key={item.id} item={item} index={i} />
           ))}
         </div>
       </Section>
 
-      <Section eyebrow="CYBERTRUCK" title="Why the Cybertruck section is intentionally thin.">
-        <p style={{ margin: 0 }}>{CYBERTRUCK_CALLOUT}</p>
-      </Section>
-
-      <Section eyebrow="INVESTIGATED BUT EXCLUDED" title="Items we considered and left off.">
-        <div
+      {/* Editorial detail — collapsed by default, present for SEO */}
+      <details style={{ marginTop: 48, borderTop: '1px solid var(--line)', paddingTop: 32 }}>
+        <summary
           style={{
-            border: '1px solid var(--line)',
-            background: 'var(--bg-1)',
+            cursor: 'pointer',
+            fontFamily: 'var(--font-mono)',
+            fontSize: 12,
+            textTransform: 'uppercase',
+            letterSpacing: '0.08em',
+            color: 'var(--fg-2)',
+            userSelect: 'none',
           }}
         >
-          {EXCLUDED.map((item, i) => (
-            <div
-              key={item.name}
-              style={{
-                padding: isMobile ? '14px 18px' : '16px 24px',
-                borderBottom: i < EXCLUDED.length - 1 ? '1px solid var(--line)' : 'none',
-                display: 'grid',
-                gridTemplateColumns: isMobile ? '1fr' : '220px 1fr',
-                gap: isMobile ? 4 : 24,
-                fontSize: 14,
-                lineHeight: 1.55,
-              }}
-            >
-              <strong style={{ fontSize: 14 }}>{item.name}</strong>
-              <span style={{ color: 'var(--fg-2)' }}>{item.reason}</span>
+          Cybertruck note · Excluded items · Methodology
+        </summary>
+        <div style={{ marginTop: 24, display: 'flex', flexDirection: 'column', gap: 32 }}>
+          <div>
+            <div className="eyebrow" style={{ marginBottom: 10 }}>Cybertruck</div>
+            <p style={{ margin: 0, fontSize: 14, lineHeight: 1.65 }}>{CYBERTRUCK_CALLOUT}</p>
+          </div>
+          <div>
+            <div className="eyebrow" style={{ marginBottom: 10 }}>Investigated but excluded</div>
+            <div style={{ border: '1px solid var(--line)', background: 'var(--bg-1)' }}>
+              {EXCLUDED.map((item, i) => (
+                <div
+                  key={item.name}
+                  style={{
+                    padding: isMobile ? '12px 16px' : '14px 20px',
+                    borderBottom: i < EXCLUDED.length - 1 ? '1px solid var(--line)' : 'none',
+                    display: 'grid',
+                    gridTemplateColumns: isMobile ? '1fr' : '220px 1fr',
+                    gap: isMobile ? 4 : 24,
+                    fontSize: 13,
+                    lineHeight: 1.55,
+                  }}
+                >
+                  <strong style={{ fontSize: 13 }}>{item.name}</strong>
+                  <span style={{ color: 'var(--fg-2)' }}>{item.reason}</span>
+                </div>
+              ))}
             </div>
-          ))}
+          </div>
+          <div>
+            <div className="eyebrow" style={{ marginBottom: 10 }}>Methodology</div>
+            <p style={{ fontSize: 14, lineHeight: 1.65, margin: 0 }}>
+              Every item cites at least 2 independent owner-forum threads. Sources are TMC,
+              r/TeslaLounge, Cybertruck Owners Club, and Tesla Owners Online. Vendor blogs were used
+              to find candidates, never as evidence. List refreshed every 6 months.{' '}
+              <span style={{ fontFamily: 'var(--font-mono)', fontSize: 12, color: 'var(--fg-2)' }}>
+                Last updated: {LAST_UPDATED}
+              </span>
+            </p>
+          </div>
         </div>
-      </Section>
-
-      <Section eyebrow="METHODOLOGY" title="How this list gets made and refreshed.">
-        <p>
-          Every item above cites at least two independent owner-forum threads — real URLs, real
-          owner voices. Sources are TeslaMotorsClub, r/TeslaLounge and model-specific subreddits,
-          Cybertruck Owners Club, and Tesla Owners Online. Vendor blogs and sponsored YouTube
-          roundups were used to identify candidates for verification, never as evidence.
-        </p>
-        <p style={{ marginTop: 12 }}>
-          The list gets a fresh research pass every six months. Brand consensus shifts (especially
-          for the Cybertruck), refresh-year fitment changes break old recommendations, and
-          marketing cycles keep introducing new "must-have" items that we'll evaluate
-          skeptically.
-        </p>
-        <p style={{ marginTop: 12, fontSize: 13, color: 'var(--fg-2)' }}>
-          Last refreshed:{' '}
-          <span style={{ fontFamily: 'var(--font-mono)' }}>{LAST_UPDATED}</span>.
-        </p>
-      </Section>
+      </details>
     </InfoPage>
   );
 }
