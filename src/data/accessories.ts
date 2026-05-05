@@ -115,7 +115,7 @@ export const ACCESSORIES: Accessory[] = [
         source: 'TMC',
       },
     ],
-    affiliate: { provider: 'amazon', url: 'https://www.amazon.com/dp/B0F2FDX1QD?tag=teslachecklis-20' },
+    affiliate: { provider: 'amazon', url: 'https://www.amazon.com/s?k=tesla+all+weather+floor+mats&tag=teslachecklis-20' },
     confidence: 'HIGH',
   },
   {
