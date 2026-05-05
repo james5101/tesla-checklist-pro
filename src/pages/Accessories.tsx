@@ -202,6 +202,21 @@ function AccessoryCard({ item, index }: { item: Accessory; index: number }) {
         {item.blurb}
       </p>
 
+      {/* Affiliate CTA */}
+      {item.affiliate && (
+        <div style={{ marginTop: 16 }}>
+          <a
+            href={item.affiliate.url}
+            target="_blank"
+            rel="noopener noreferrer sponsored"
+            className="btn btn--primary"
+            style={{ fontSize: 13, padding: '10px 18px', display: 'inline-flex' }}
+          >
+            Shop on Amazon →
+          </a>
+        </div>
+      )}
+
       {/* Brands */}
       <div style={{ marginTop: 16 }}>
         <div
@@ -452,9 +467,6 @@ export default function Accessories() {
       "Eight accessories worth buying before delivery, sourced from TMC and Cybertruck Owners Club forums. Plus five commonly pushed items owners say to skip. No listicle padding, no invented recommendations.",
     canonical: 'https://teslachecklistpro.com/tesla-delivery-day-accessories',
     jsonLd,
-    // Shipping dark until Amazon Associates is approved. Remove this line
-    // (and add the URL to public/sitemap.xml) to go live.
-    robots: 'noindex, nofollow',
   });
 
   return (

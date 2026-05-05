@@ -115,6 +115,7 @@ export const ACCESSORIES: Accessory[] = [
         source: 'TMC',
       },
     ],
+    affiliate: { provider: 'amazon', url: 'https://www.amazon.com/dp/B0F2FDX1QD?tag=teslachecklis-20' },
     confidence: 'HIGH',
   },
   {
@@ -151,6 +152,7 @@ export const ACCESSORIES: Accessory[] = [
       },
     ],
     modelNote: 'Value ranking across the lineup: Cybertruck > Model Y > Model 3 > Model S > Model X.',
+    affiliate: { provider: 'amazon', url: 'https://www.amazon.com/s?k=tesla+mud+flaps&tag=teslachecklis-20' },
     confidence: 'HIGH',
   },
   {
@@ -183,6 +185,7 @@ export const ACCESSORIES: Accessory[] = [
     ],
     modelNote:
       'Cybertruck: buy Cybertruck-specific only. Owners report mixed fitment on generic listings that claim CT support.',
+    affiliate: { provider: 'amazon', url: 'https://www.amazon.com/s?k=tesla+screen+protector+tempered+glass&tag=teslachecklis-20' },
     confidence: 'MEDIUM',
   },
   {
@@ -215,6 +218,7 @@ export const ACCESSORIES: Accessory[] = [
     ],
     modelNote:
       "The Highland (Model 3, 2024+) and Juniper (Model Y, 2025+) consoles changed shape. Buy a tray sold for your specific generation — 'fits all' claims should be treated with suspicion.",
+    affiliate: { provider: 'amazon', url: 'https://www.amazon.com/s?k=tesla+center+console+organizer&tag=teslachecklis-20' },
     confidence: 'HIGH',
   },
   {
@@ -245,6 +249,7 @@ export const ACCESSORIES: Accessory[] = [
         source: 'TOO',
       },
     ],
+    affiliate: { provider: 'amazon', url: 'https://www.amazon.com/s?k=high+endurance+usb+drive+sentry+mode+dashcam&tag=teslachecklis-20' },
     confidence: 'HIGH',
   },
   {
@@ -280,6 +285,7 @@ export const ACCESSORIES: Accessory[] = [
         source: 'TMC',
       },
     ],
+    affiliate: { provider: 'amazon', url: 'https://www.amazon.com/s?k=tire+plug+kit+12v+compressor&tag=teslachecklis-20' },
     confidence: 'HIGH',
   },
   {
@@ -315,6 +321,7 @@ export const ACCESSORIES: Accessory[] = [
         source: 'TMC',
       },
     ],
+    affiliate: { provider: 'amazon', url: 'https://www.amazon.com/s?k=tesla+mobile+connector+240v+NEMA+14-50&tag=teslachecklis-20' },
     modelNote:
       "Cybertruck: the Mobile Connector at 32A is slow for the truck's larger pack. Owners call a hardwired Wall Connector at 48A essential there — the mobile unit is a backup, not a primary.",
     addon: {
@@ -376,6 +383,7 @@ export const ACCESSORIES: Accessory[] = [
       },
     ],
     modelNote: 'Highest ROI on Model S, 3, and Y (large glass roofs amplify cabin heat).',
+    affiliate: { provider: 'amazon', url: 'https://www.amazon.com/s?k=tesla+windshield+sunshade+custom+fit&tag=teslachecklis-20' },
     confidence: 'MEDIUM',
   },
 ];
