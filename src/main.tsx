@@ -9,6 +9,7 @@ import Faq from './pages/Faq';
 import HowItWorks from './pages/HowItWorks';
 import Inspection from './pages/Inspection';
 import Owners from './pages/Owners';
+import PrintChecklist from './pages/PrintChecklist';
 import Accessories from './pages/Accessories';
 import ArticleDeliveryDefects from './pages/ArticleDeliveryDefects';
 import ArticleWhatsIncluded from './pages/ArticleWhatsIncluded';
@@ -27,6 +28,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
         <Route path="/how-it-works" element={<HowItWorks />} />
         <Route path="/owners" element={<Owners />} />
         <Route path="/faq" element={<Faq />} />
+        <Route path="/print" element={<PrintChecklist />} />
         <Route path="/tesla-delivery-day-accessories" element={<Accessories />} />
         <Route path="/tesla-delivery-defects-what-to-do" element={<ArticleDeliveryDefects />} />
         <Route path="/whats-included-with-new-tesla" element={<ArticleWhatsIncluded />} />
