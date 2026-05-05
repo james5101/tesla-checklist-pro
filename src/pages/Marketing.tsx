@@ -140,7 +140,10 @@ const Hero = () => {
           >
             Start my inspection →
           </Link>
-          <a href="#how" className="btn" style={{ padding: '14px 22px', fontSize: 14 }}>
+          <Link to="/print" className="btn" style={{ padding: '14px 22px', fontSize: 14 }}>
+            Download PDF
+          </Link>
+          <a href="#how" className="btn btn--ghost" style={{ padding: '14px 22px', fontSize: 14 }}>
             How it works
           </a>
         </div>
