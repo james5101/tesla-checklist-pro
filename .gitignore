@@ -57,6 +57,9 @@ _design.tar.gz
 coverage
 .nyc_output
 
+# Generated assets (not committed)
+public/og-image.html
+
 # Misc
 .cache
 .parcel-cache
