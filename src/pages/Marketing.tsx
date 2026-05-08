@@ -5,76 +5,185 @@ import { useIsMobile, useIsNarrow } from '../hooks/useMediaQuery';
 import { useSeo } from '../hooks/useSeo';
 import { ThemeToggle } from '../components/ThemeToggle';
 
+const NAV_LINKS = [
+  { label: 'Inspection', to: '/inspection' },
+  { label: 'How it works', to: '/how-it-works' },
+  { label: 'Owners', to: '/owners' },
+  { label: 'Accessories', to: '/tesla-delivery-day-accessories' },
+  { label: 'FAQ', to: '/faq' },
+];
+
 export const Nav = () => {
   const [scrolled, setScrolled] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
   const isMobile = useIsMobile();
   const isNarrow = useIsNarrow();
+
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
     window.addEventListener('scroll', onScroll);
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
+
+  useEffect(() => {
+    if (menuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => { document.body.style.overflow = ''; };
+  }, [menuOpen]);
+
+  const close = () => setMenuOpen(false);
+
   return (
-    <nav
-      style={{
-        position: 'fixed',
-        top: 0,
-        left: 0,
-        right: 0,
-        height: 56,
-        zIndex: 100,
-        background: scrolled ? 'var(--bg-0)' : 'transparent',
-        backdropFilter: scrolled ? 'blur(20px)' : 'none',
-        WebkitBackdropFilter: scrolled ? 'blur(20px)' : 'none',
-        borderBottom: scrolled ? '1px solid var(--line)' : '1px solid transparent',
-        transition: 'all 180ms cubic-bezier(0.2,0,0,1)',
-      }}
-    >
-      <div
+    <>
+      <nav
         style={{
-          maxWidth: 1200,
-          height: '100%',
-          margin: '0 auto',
-          padding: isMobile ? '0 20px' : '0 40px',
-          display: 'flex',
-          alignItems: 'center',
-          gap: isMobile ? 12 : 32,
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          right: 0,
+          height: 56,
+          zIndex: 100,
+          background: scrolled || menuOpen ? 'var(--bg-0)' : 'transparent',
+          backdropFilter: scrolled || menuOpen ? 'blur(20px)' : 'none',
+          WebkitBackdropFilter: scrolled || menuOpen ? 'blur(20px)' : 'none',
+          borderBottom: scrolled || menuOpen ? '1px solid var(--line)' : '1px solid transparent',
+          transition: 'all 180ms cubic-bezier(0.2,0,0,1)',
         }}
       >
-        <Link to="/" style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-          <img src={logoMark} width="22" height="22" alt="" />
-          <span style={{ fontSize: 14, fontWeight: 600 }}>
-            TeslaChecklist<span style={{ color: 'var(--accent)' }}>Pro</span>
-          </span>
-        </Link>
-        {!isNarrow && (
-          <div style={{ display: 'flex', gap: 24, marginLeft: 24 }}>
-            {[
-              { label: 'Inspection', to: '/inspection' },
-              { label: 'How it works', to: '/how-it-works' },
-              { label: 'Owners', to: '/owners' },
-              { label: 'Accessories', to: '/tesla-delivery-day-accessories' },
-              { label: 'FAQ', to: '/faq' },
-            ].map((l) => (
-              <Link key={l.to} to={l.to} style={{ fontSize: 13, color: 'var(--fg-1)' }}>
-                {l.label}
+        <div
+          style={{
+            maxWidth: 1200,
+            height: '100%',
+            margin: '0 auto',
+            padding: isMobile ? '0 20px' : '0 40px',
+            display: 'flex',
+            alignItems: 'center',
+            gap: isMobile ? 12 : 32,
+          }}
+        >
+          <Link to="/" onClick={close} style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+            <img src={logoMark} width="22" height="22" alt="" />
+            <span style={{ fontSize: 14, fontWeight: 600 }}>
+              TeslaChecklist<span style={{ color: 'var(--accent)' }}>Pro</span>
+            </span>
+          </Link>
+          {!isNarrow && (
+            <div style={{ display: 'flex', gap: 24, marginLeft: 24 }}>
+              {NAV_LINKS.map((l) => (
+                <Link key={l.to} to={l.to} style={{ fontSize: 13, color: 'var(--fg-1)' }}>
+                  {l.label}
+                </Link>
+              ))}
+            </div>
+          )}
+          <div style={{ marginLeft: 'auto', display: 'flex', gap: 8, alignItems: 'center' }}>
+            <ThemeToggle compact />
+            {!isNarrow && (
+              <Link to="/app" className="btn btn--ghost">
+                Sign in
               </Link>
-            ))}
+            )}
+            {!isNarrow && (
+              <Link to="/app" className="btn btn--primary">
+                Start inspection →
+              </Link>
+            )}
+            {isNarrow && (
+              <button
+                onClick={() => setMenuOpen((o) => !o)}
+                aria-label={menuOpen ? 'Close menu' : 'Open menu'}
+                style={{
+                  width: 36,
+                  height: 36,
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  gap: 5,
+                  background: 'transparent',
+                  border: 'none',
+                  cursor: 'pointer',
+                  padding: 6,
+                }}
+              >
+                {menuOpen ? (
+                  <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="var(--fg-0)" strokeWidth="1.5" strokeLinecap="round">
+                    <line x1="3" y1="3" x2="15" y2="15" />
+                    <line x1="15" y1="3" x2="3" y2="15" />
+                  </svg>
+                ) : (
+                  <svg width="18" height="14" viewBox="0 0 18 14" fill="none" stroke="var(--fg-0)" strokeWidth="1.5" strokeLinecap="round">
+                    <line x1="0" y1="1" x2="18" y2="1" />
+                    <line x1="0" y1="7" x2="18" y2="7" />
+                    <line x1="0" y1="13" x2="18" y2="13" />
+                  </svg>
+                )}
+              </button>
+            )}
           </div>
-        )}
-        <div style={{ marginLeft: 'auto', display: 'flex', gap: 8, alignItems: 'center' }}>
-          <ThemeToggle compact />
-          {!isMobile && (
-            <Link to="/app" className="btn btn--ghost">
+        </div>
+      </nav>
+
+      {/* Mobile drawer */}
+      {isNarrow && (
+        <div
+          style={{
+            position: 'fixed',
+            top: 56,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            zIndex: 99,
+            background: 'var(--bg-0)',
+            display: 'flex',
+            flexDirection: 'column',
+            padding: '8px 0 32px',
+            overflowY: 'auto',
+            opacity: menuOpen ? 1 : 0,
+            pointerEvents: menuOpen ? 'auto' : 'none',
+            transition: 'opacity 180ms cubic-bezier(0.2,0,0,1)',
+          }}
+        >
+          {NAV_LINKS.map((l) => (
+            <Link
+              key={l.to}
+              to={l.to}
+              onClick={close}
+              style={{
+                display: 'block',
+                padding: '16px 24px',
+                fontSize: 17,
+                color: 'var(--fg-0)',
+                borderBottom: '1px solid var(--line-soft)',
+              }}
+            >
+              {l.label}
+            </Link>
+          ))}
+          <div style={{ padding: '24px 24px 0', display: 'flex', flexDirection: 'column', gap: 10 }}>
+            <Link
+              to="/app"
+              className="btn btn--primary"
+              onClick={close}
+              style={{ justifyContent: 'center', padding: '14px', fontSize: 15 }}
+            >
+              Start inspection →
+            </Link>
+            <Link
+              to="/app"
+              className="btn btn--ghost"
+              onClick={close}
+              style={{ justifyContent: 'center', padding: '14px', fontSize: 15 }}
+            >
               Sign in
             </Link>
-          )}
-          <Link to="/app" className="btn btn--primary">
-            {isMobile ? 'Start →' : 'Start inspection →'}
-          </Link>
+          </div>
         </div>
-      </div>
-    </nav>
+      )}
+    </>
   );
 };
 
