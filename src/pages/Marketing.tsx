@@ -53,6 +53,7 @@ export const Nav = () => {
               { label: 'Inspection', to: '/inspection' },
               { label: 'How it works', to: '/how-it-works' },
               { label: 'Owners', to: '/owners' },
+              { label: 'Accessories', to: '/tesla-delivery-day-accessories' },
               { label: 'FAQ', to: '/faq' },
             ].map((l) => (
               <Link key={l.to} to={l.to} style={{ fontSize: 13, color: 'var(--fg-1)' }}>
