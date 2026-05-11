@@ -1,4 +1,11 @@
 {
+  "redirects": [
+    { "source": "/model-s", "destination": "/model-s-delivery-checklist", "permanent": true },
+    { "source": "/model-3", "destination": "/model-3-delivery-checklist", "permanent": true },
+    { "source": "/model-x", "destination": "/model-x-delivery-checklist", "permanent": true },
+    { "source": "/model-y", "destination": "/model-y-delivery-checklist", "permanent": true },
+    { "source": "/cybertruck", "destination": "/cybertruck-delivery-checklist", "permanent": true }
+  ],
   "rewrites": [
     { "source": "/(.*)", "destination": "/index.html" }
   ]
